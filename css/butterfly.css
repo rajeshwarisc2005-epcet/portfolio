@@ -1,0 +1,284 @@
+/* ==========================================================================
+   MAJESTIC GLOWING PURPLE BUTTERFLY WITH BIG WINGS & SPARKS OF LIGHT
+   Grand Wingspan, Multi-Color Stardust, Radiant Corona & Free Roaming Flight
+   ========================================================================== */
+
+#butterfly-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+/* Big Majestic Butterfly Wrapper */
+.butterfly-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 160px;
+  height: 160px;
+  pointer-events: auto;
+  cursor: pointer;
+  transform: translate3d(50vw, 30vh, 0);
+  transition: transform 0.08s linear;
+  will-change: transform;
+  filter: drop-shadow(0 0 25px rgba(236, 72, 153, 0.95))
+          drop-shadow(0 0 45px rgba(168, 85, 247, 0.8))
+          drop-shadow(0 0 70px rgba(244, 114, 182, 0.5));
+}
+
+.butterfly-body-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.butterfly {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Butterfly Torso with Royal Amethyst & Rose Gold Finish */
+.butterfly-torso {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 9px;
+  height: 64px;
+  background: linear-gradient(180deg, #4a044e 0%, #86198f 40%, #c026d3 70%, #3b0764 100%);
+  border-radius: 8px;
+  z-index: 10;
+  box-shadow: 0 0 14px rgba(236, 72, 153, 0.95), 0 0 6px #ffffff;
+}
+
+/* Head */
+.butterfly-torso::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 13px;
+  height: 13px;
+  background: radial-gradient(circle, #ffffff 20%, #fdf2f8 60%, #c084fc 100%);
+  border-radius: 50%;
+  box-shadow: 0 0 18px #f43f5e, 0 0 8px #fbbf24;
+}
+
+/* Long Elegant Antennae */
+.antenna-left, .antenna-right {
+  position: absolute;
+  top: -26px;
+  width: 18px;
+  height: 24px;
+  border-top: 2px solid #fbbf24;
+  border-radius: 50% 50% 0 0;
+}
+.antenna-left {
+  left: -9px;
+  border-left: 2px solid #fbbf24;
+  transform: rotate(-32deg);
+}
+.antenna-right {
+  right: -9px;
+  border-right: 2px solid #fbbf24;
+  transform: rotate(32deg);
+}
+
+.antenna-left::after, .antenna-right::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  width: 5px;
+  height: 5px;
+  background: #fef08a;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #fbbf24, 0 0 18px #f59e0b;
+}
+.antenna-left::after { right: -1px; }
+.antenna-right::after { left: -1px; }
+
+/* Wing Groups (Left and Right) with 3D Flapping */
+.wing-group {
+  position: absolute;
+  top: 50%;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.wing-group.left {
+  right: 50%;
+  transform-origin: right center;
+  animation: flapLeft 0.28s ease-in-out infinite alternate;
+}
+
+.wing-group.right {
+  left: 50%;
+  transform-origin: left center;
+  animation: flapRight 0.28s ease-in-out infinite alternate;
+}
+
+/* High-speed fluttering while moving/scrolling */
+.butterfly-wrapper.is-moving .wing-group.left {
+  animation: flapLeft 0.1s ease-in-out infinite alternate;
+}
+.butterfly-wrapper.is-moving .wing-group.right {
+  animation: flapRight 0.1s ease-in-out infinite alternate;
+}
+
+/* Big Wings Dimensions */
+.wing-svg {
+  width: 80px;
+  height: 110px;
+  display: block;
+  filter: drop-shadow(0 0 10px rgba(236, 72, 153, 0.45));
+}
+
+.wing-group.left .wing-svg {
+  transform: scaleX(-1);
+}
+
+/* Large Radiant Light Corona / Glow Aura */
+.butterfly-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(244, 114, 182, 0.5) 0%, rgba(168, 85, 247, 0.3) 40%, rgba(251, 191, 36, 0.15) 65%, transparent 80%);
+  pointer-events: none;
+  animation: pulseRadiantLight 2.2s ease-in-out infinite alternate;
+}
+
+/* Glowing Sparkle & Light Particles */
+.sparkle-particle {
+  position: absolute;
+  pointer-events: none;
+  z-index: 9998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: sparkFade 1.4s cubic-bezier(0.1, 0.7, 0.3, 1) forwards;
+}
+
+/* Diamond Star Sparks */
+.sparkle-star {
+  font-family: Arial, sans-serif;
+  line-height: 1;
+  color: #fff;
+  filter: drop-shadow(0 0 8px currentColor) drop-shadow(0 0 16px currentColor);
+}
+
+/* Glowing Light Orbs */
+.sparkle-orb {
+  border-radius: 50%;
+  box-shadow: 0 0 14px currentColor, 0 0 28px currentColor;
+}
+
+/* Trailing Light Beams */
+.sparkle-beam {
+  width: 3px;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #ffffff, currentColor);
+  box-shadow: 0 0 12px currentColor;
+}
+
+/* Cursor Sparkles */
+.cursor-sparkle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9997;
+  animation: cursorSparkleFade 0.85s ease-out forwards;
+}
+
+@keyframes cursorSparkleFade {
+  0% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.1) rotate(120deg) translate3d(var(--cdx, 0px), var(--cdy, -16px), 0);
+  }
+}
+
+/* 3D Wing Flap Keyframes */
+@keyframes flapLeft {
+  0% {
+    transform: translateY(-50%) rotateY(0deg) rotateZ(0deg);
+  }
+  100% {
+    transform: translateY(-50%) rotateY(74deg) rotateZ(-12deg);
+  }
+}
+
+@keyframes flapRight {
+  0% {
+    transform: translateY(-50%) rotateY(0deg) rotateZ(0deg);
+  }
+  100% {
+    transform: translateY(-50%) rotateY(-74deg) rotateZ(12deg);
+  }
+}
+
+@keyframes pulseRadiantLight {
+  0% {
+    transform: translate(-50%, -50%) scale(0.85);
+    opacity: 0.75;
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.35);
+    opacity: 1;
+    filter: hue-rotate(35deg);
+  }
+}
+
+@keyframes sparkFade {
+  0% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--tx, 0px), var(--ty, 25px), 0) scale(0.2) rotate(240deg);
+  }
+}
+
+/* Interactive Hint Tooltip */
+.butterfly-hint {
+  position: absolute;
+  top: -32px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  font-weight: 800;
+  background: linear-gradient(135deg, #ffffff 0%, #fff0f5 100%);
+  color: #be185d;
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(244, 114, 182, 0.7);
+  box-shadow: 0 6px 20px rgba(244, 63, 94, 0.25);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.butterfly-wrapper:hover .butterfly-hint {
+  opacity: 1;
+}

@@ -1,0 +1,19 @@
+{
+  "name": "rajeshwari-portfolio",
+  "version": "1.0.0",
+  "description": "Executive Portfolio & AI Copilot for Rajeshwari S C - Business Analyst & Enterprise Strategist",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "portfolio",
+    "business-analyst",
+    "enterprise-strategist",
+    "ai-copilot",
+    "executive"
+  ],
+  "author": "Rajeshwari S C",
+  "license": "ISC"
+}
