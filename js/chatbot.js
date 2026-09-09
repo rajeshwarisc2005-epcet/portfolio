@@ -245,6 +245,41 @@
     }
   }
 
+  // Client-Side Intelligence Engine (Fallback for static hosting like GitHub Pages)
+  function getOfflineResponse(rawText) {
+    const text = (rawText || '').toLowerCase().trim();
+
+    if (text.includes('who are you') || text.includes('who is rajeshwari') || text.includes('about') || text.includes('profile')) {
+      return `**Rajeshwari S C** is a premier **Business Analyst & Enterprise Strategist** at **Elien**, and an active Board Member on the **Board of Innovation & Tech at Hridayamrit Foundation**.\n\nShe specializes in bridging deep-tech software architecture and strategic enterprise delivery across software, industrial engineering, and civil construction. Her motto: *"Technology without strategy is noise. Strategy without technology is slow. I build the bridge between both."*`;
+    }
+
+    if (text.includes('elien') || text.includes('current role') || text.includes('job') || text.includes('work')) {
+      return `At **Elien**, Rajeshwari serves as **Business Analyst & Enterprise Strategist**, orchestrating requirements engineering, system integration, and agile delivery across three high-impact portfolios:\n- **Digital Software**: Product specs, API data flows, and UI/UX roadmaps\n- **Industrial Engineering**: ERP integration, supply chain transparency, and factory floor logistics\n- **Civil Construction**: Infrastructure project management and agile milestone governance`;
+    }
+
+    if (text.includes('foundation') || text.includes('hridayamrit') || text.includes('board') || text.includes('cardiac') || text.includes('ngo')) {
+      return `Rajeshwari serves on the **Board of Innovation & Technology** at the **Hridayamrit Foundation**.\n\nShe directs digital healthcare roadmaps, AI-driven diagnostics integration, and remote patient monitoring initiatives aimed at democratizing life-saving cardiac care for underserved communities across India.`;
+    }
+
+    if (text.includes('domain') || text.includes('expertise') || text.includes('skill') || text.includes('what do you do') || text.includes('special')) {
+      return `Rajeshwari commands mastery across **4 Core Domains**:\n\n1. **Digital Software Systems**: API design specs, cloud data architecture, user stories, and acceptance test criteria.\n2. **Industrial Engineering**: Heavy machinery workflows, SCADA/IoT data points, and supply chain ERP modules.\n3. **Civil Construction**: Infrastructure project lifecycle management, contractor coordination, and agile sprint tracking.\n4. **Agile & Enterprise Governance**: Cross-functional team leadership, executive alignment, and sprint cadence management.`;
+    }
+
+    if (text.includes('method') || text.includes('approach') || text.includes('framework') || text.includes('how do you work') || text.includes('strategy')) {
+      return `Rajeshwari operates on a rigorous **3-Step Strategic Methodology**:\n\n1. **Listen First**: In-depth executive stakeholder discovery, root-cause discovery, and operational baseline audits.\n2. **Translate Precisely**: Converting ambiguous strategic goals into clear functional specifications, API contracts, and engineering backlogs.\n3. **Deliver Iteratively**: Sprint-by-sprint increments, continuous stakeholder demos, and quantifiable business ROI.`;
+    }
+
+    if (text.includes('contact') || text.includes('hire') || text.includes('reach') || text.includes('email') || text.includes('connect')) {
+      return `You can connect directly with Rajeshwari:\n- **LinkedIn**: [Rajeshwari on LinkedIn](https://linkedin.com)\n- **Instagram**: [@rajeshwari](https://instagram.com)\n- **Inquiry**: You can also submit the contact form right at the bottom of this portfolio!`;
+    }
+
+    if (text.includes('reel') || text.includes('video') || text.includes('instagram') || text.includes('presence')) {
+      return `Check out the **Executive Presence & Reels** gallery right here on the portfolio! Rajeshwari shares high-impact executive insights on agile transformation, enterprise decision-making, and cross-functional leadership. Click on any video card in the gallery to watch in full view!`;
+    }
+
+    return `Thank you for asking! Rajeshwari is a **Business Analyst & Enterprise Strategist** at **Elien** and Board Member at **Hridayamrit Foundation**.\n\nFeel free to explore her **Case Studies**, **Interactive Media Gallery**, or ask about her work across **Digital Software**, **Industrial Systems**, and **Agile Leadership**!`;
+  }
+
   // Send Message Logic
   async function sendMessage(text) {
     const cleanText = (text || '').trim();
@@ -272,6 +307,10 @@
         })
       });
 
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+
       const data = await response.json();
       hideTyping();
 
@@ -280,9 +319,10 @@
       conversationHistory.push({ role: 'assistant', content: reply });
     } catch (err) {
       hideTyping();
-      console.error('Chat error:', err);
-      const errorMsg = 'I apologize, but I had trouble connecting to the AI service. Please ensure the server is running and try again.';
-      appendMessage('assistant', errorMsg);
+      console.warn('Backend unavailable, using client-side knowledge engine:', err);
+      const fallbackReply = getOfflineResponse(cleanText);
+      appendMessage('assistant', fallbackReply);
+      conversationHistory.push({ role: 'assistant', content: fallbackReply });
     } finally {
       isAwaitingReply = false;
       if (sendBtn) sendBtn.disabled = false;
